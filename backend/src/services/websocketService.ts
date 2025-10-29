@@ -2,10 +2,6 @@ import { Server as SocketIOServer } from 'socket.io';
 import { Server as HTTPServer } from 'http';
 import User from '../models/User';
 import PatientDoctor from '../models/PatientDoctor';
-<<<<<<< HEAD
-=======
-import Chat from '../models/Chat';
->>>>>>> 4f8a4e9 (chatkit)
 
 interface AuthenticatedSocket {
   userId: string;
@@ -86,84 +82,6 @@ class WebSocketService {
           socket.join(`relationship_${data.relationshipId}`);
         }
       });
-<<<<<<< HEAD
-=======
-      
-      // Handle typing indicator
-      socket.on('typing_start', async (data: { patientDoctorId: string }) => {
-        const user = this.connectedUsers.get(socket.id);
-        if (user && user.isAuthenticated) {
-          // Find the relationship to determine the recipient
-          const relationship = await PatientDoctor.findById(data.patientDoctorId);
-          if (relationship) {
-            const recipientId = user.userId === relationship.patientId.toString() 
-              ? relationship.doctorId.toString() 
-              : relationship.patientId.toString();
-              
-            // Emit typing event to the recipient
-            this.io?.to(recipientId).emit('typing_indicator', {
-              patientDoctorId: data.patientDoctorId,
-              isTyping: true,
-              userId: user.userId
-            });
-          }
-        }
-      });
-      
-      // Handle typing end
-      socket.on('typing_end', async (data: { patientDoctorId: string }) => {
-        const user = this.connectedUsers.get(socket.id);
-        if (user && user.isAuthenticated) {
-          // Find the relationship to determine the recipient
-          const relationship = await PatientDoctor.findById(data.patientDoctorId);
-          if (relationship) {
-            const recipientId = user.userId === relationship.patientId.toString() 
-              ? relationship.doctorId.toString() 
-              : relationship.patientId.toString();
-              
-            // Emit typing end event to the recipient
-            this.io?.to(recipientId).emit('typing_indicator', {
-              patientDoctorId: data.patientDoctorId,
-              isTyping: false,
-              userId: user.userId
-            });
-          }
-        }
-      });
-      
-      // Handle new message
-      socket.on('new_message', async (data: { patientDoctorId: string, messageId: string }) => {
-        const user = this.connectedUsers.get(socket.id);
-        if (user && user.isAuthenticated) {
-          // Find the chat and get the latest message
-          const chat = await Chat.findOne(
-            { patientDoctorId: data.patientDoctorId, 'messages._id': data.messageId },
-            { 'messages.$': 1 }
-          ).populate({
-            path: 'messages.sender',
-            select: 'firstName lastName role profileImage'
-          });
-          
-          if (chat && chat.messages.length > 0) {
-            const message = chat.messages[0];
-            
-            // Find the relationship to determine the recipient
-            const relationship = await PatientDoctor.findById(data.patientDoctorId);
-            if (relationship) {
-              const recipientId = user.userId === relationship.patientId.toString() 
-                ? relationship.doctorId.toString() 
-                : relationship.patientId.toString();
-                
-              // Emit new message event to the recipient
-              this.io?.to(recipientId).emit('receive_message', {
-                patientDoctorId: data.patientDoctorId,
-                message
-              });
-            }
-          }
-        }
-      });
->>>>>>> 4f8a4e9 (chatkit)
     });
   }
 

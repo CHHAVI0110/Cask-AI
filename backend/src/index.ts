@@ -13,10 +13,6 @@ import exerciseResultsRoutes from './routes/exerciseResults';
 import activityRoutes from './routes/activities';
 import notificationRoutes from './routes/notifications';
 import patientDoctorRoutes from './routes/patientDoctor';
-<<<<<<< HEAD
-=======
-import chatRoutes from './routes/chat';
->>>>>>> 4f8a4e9 (chatkit)
 import websocketService from './services/websocketService';
 
 dotenv.config();
@@ -60,11 +56,6 @@ app.use('/api/results', exerciseResultsRoutes);
 app.use('/api/activities', activityRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/doctor', patientDoctorRoutes);
-<<<<<<< HEAD
-=======
-app.use('/api/chat', chatRoutes);
->>>>>>> 4f8a4e9 (chatkit)
-
 const PORT = Number(process.env.PORT) || 8000;
 const server = createServer(app);
 

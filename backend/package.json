@@ -10,10 +10,6 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
-    "axios": "^1.12.2",
->>>>>>> 4f8a4e9 (chatkit)
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
