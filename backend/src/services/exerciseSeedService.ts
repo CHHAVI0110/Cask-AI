@@ -242,7 +242,77 @@ export class ExerciseSeedService {
           },
           createdBy: new Types.ObjectId(),
           isActive: true
-        }
+        },
+        {
+  name: 'Shoulder Abduction',
+  description: 'An exercise to improve shoulder mobility and strength.',
+  instructions: [
+    'Stand straight with arms at your sides',
+    'Slowly raise one arm sideways',
+    'Lift arm until shoulder height',
+    'Lower arm slowly',
+    'Repeat on the other side'
+  ],
+  difficulty: 'beginner' as const,
+  duration: 240,
+  targetMuscles: ['Deltoids', 'Rotator Cuff'],
+  category: 'rehabilitation' as const,
+  equipment: [],
+  caloriesPerMinute: 5,
+  poseLandmarks: {
+    keyPoints: ['left_shoulder', 'left_elbow', 'left_wrist'],
+    angles: [
+      {
+        name: 'shoulder_angle',
+        points: ['left_elbow', 'left_shoulder', 'left_hip'],
+        targetRange: [70, 110]
+      }
+    ],
+    repDetection: {
+      trigger: 'left_wrist',
+      direction: 'up',
+      threshold: 0.12
+    }
+  },
+  formGuidance: {
+    correctForm: {
+      description: 'Lift arm sideways with control.',
+      keyPoints: [
+        'Keep arm straight',
+        'Avoid shrugging shoulders',
+        'Move slowly and controlled'
+      ],
+      commonMistakes: [
+        'Using momentum',
+        'Shrugging shoulders',
+        'Lifting too high'
+      ],
+      tips: [
+        'Use light weights if needed',
+        'Focus on control',
+        'Stop if pain occurs'
+      ]
+    },
+    visualGuide: {
+      referenceImage: '/images/shoulder-abduction.jpg',
+      referenceVideo: '/videos/shoulder-abduction.mp4',
+      landmarks: [
+        { name: 'Shoulder', position: 'Shoulder joint', importance: 'critical' },
+        { name: 'Elbow', position: 'Elbow joint', importance: 'important' }
+      ]
+    },
+    datasetInfo: {
+      source: 'CaskAI Rehab Dataset v1.0',
+      sampleCount: 4200,
+      accuracy: 92.3,
+      lastUpdated: new Date(),
+      version: '1.0.0'
+    }
+  },
+  createdBy: new Types.ObjectId(),
+  isActive: true
+}
+
       ];
 
       await Exercise.insertMany(sampleExercises);
