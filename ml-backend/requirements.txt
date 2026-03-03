@@ -1,0 +1,8 @@
+# Requirements for ML Backend
+
+mediapipe
+torch
+numpy
+pandas
+scikit-learn
+matplotlib
