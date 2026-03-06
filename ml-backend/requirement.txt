@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+numpy
+pydantic
+starlette
+anyio
+click
+requests
+tensorflow
